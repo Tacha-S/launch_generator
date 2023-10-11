@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [main]
+    branches: [main, debug-ci]
     tags: ["v*"]
   pull_request:
     types: [opened, synchronize, reopened]
@@ -23,6 +23,7 @@ jobs:
           python3 setup.py sdist
       - name: Install
         run: |
+          export PYTHONPATH=$PYTHONPATH:/opt/ros/humble/lib/python3.10/site-packages/
           pip3 install .
       - name: Publish to PyPI
         if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'
