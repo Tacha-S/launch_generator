@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  release:
+    types:
+      - created
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    container: ros:humble
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up pip
+        run: apt update && apt install -y python3-pip
+      - name: Build
+        run: |
+          python3 setup.py sdist
+      - name: Install
+        run: |
+          pip3 install .
+      - name: Publish to PyPI
+        if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'
+        uses: pypa/gh-action-pypi-publish@v1.8.6
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
