@@ -23,7 +23,6 @@ jobs:
           python3 setup.py sdist
       - name: Install
         run: |
-          PYTHONPATH=/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages:$PYTHONPATH
           pip3 install .
       - name: Publish to PyPI
         if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'
