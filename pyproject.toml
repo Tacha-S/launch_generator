@@ -1,0 +1,21 @@
+[project]
+name = "launch-generator"
+version = "0.1.0"
+description = "Simple launch file generator for ROS2."
+authors = [
+    { name = "Tatsuro Sakaguchi", email = "tatsuro.sakaguchi@g.softbank.co.jp" },
+]
+dependencies = ["launch", "launch_ros"]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
