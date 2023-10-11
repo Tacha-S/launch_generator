@@ -38,5 +38,5 @@ def generate_launch_description() -> LaunchDescription:
     # Add nodes to group
     group.add_node('executable_name', 'package_name')
 
-    return gen.generate_launch_description()
+    return LaunchDescription(gen.generate_launch_description())
 ```
