@@ -16,7 +16,8 @@
 
 from launch_generator.base_generator import BaseGenerator
 from launch_generator.container_generator import ContainerGenerator
-from launch_generator.group_generator import GroupGenerator
+
+from launch_generator.group_generator import GroupGenerator  # isort: skip
 from launch_generator.generator import Generator
 
 __all__ = [
