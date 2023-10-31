@@ -17,12 +17,12 @@
 import setuptools
 
 setuptools.setup(
-    name="launch_generator",
-    version="0.0.1",
-    author="Tatsuro Sakaguchi",
-    author_email="tatsuro.sakaguchi@g.softbank.co.jp",
-    description="The package `launch-generator` is a tool to easily generate launch descriptions for ROS 2.",
-    url="https://github.com/Tacha-S/launch_generator",
-    package_dir={"": "src"},
-    packages=setuptools.find_packages("src", include=["launch_generator"]),
+    name='launch_generator',
+    version='0.1.1',
+    author='Tatsuro Sakaguchi',
+    author_email='tatsuro.sakaguchi@g.softbank.co.jp',
+    description='The package `launch-generator` is a tool to easily generate launch descriptions for ROS 2.',
+    url='https://github.com/Tacha-S/launch_generator',
+    package_dir={'': 'src'},
+    packages=setuptools.find_packages('src', include=['launch_generator']),
 )
