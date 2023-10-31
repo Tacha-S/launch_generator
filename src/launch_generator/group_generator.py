@@ -51,7 +51,7 @@ class GroupGenerator(launch_generator.BaseGenerator):
                      name: typing.Text,
                      default_value: launch.some_substitutions_type.SomeSubstitutionsType | None = None,
                      description: typing.Text | None = None,
-                     choices: typing.Iterable[typing.Text] | None = None) -> launch.actions.DeclareLaunchArgument:
+                     choices: typing.Iterable[typing.Text] | None = None) -> launch.substitutions.LaunchConfiguration:
         """Declare launch argument and get it.
 
         Returns:
