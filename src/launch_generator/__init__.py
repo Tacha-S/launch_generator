@@ -21,8 +21,8 @@ from launch_generator.group_generator import GroupGenerator  # isort: skip
 from launch_generator.generator import Generator
 
 __all__ = [
-    "BaseGenerator",
-    "ContainerGenerator",
-    "Generator",
-    "GroupGenerator",
+    'BaseGenerator',
+    'ContainerGenerator',
+    'Generator',
+    'GroupGenerator',
 ]

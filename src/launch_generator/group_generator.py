@@ -111,7 +111,7 @@ class GroupGenerator(launch_generator.BaseGenerator):
         include_file = pathlib.Path(
             launch_ros.substitutions.FindPackageShare(package).find(package)) / relative_file_path
         if not include_file.exists():
-            raise FileNotFoundError(f"Include launch file not found: {include_file}")
+            raise FileNotFoundError(f'Include launch file not found: {include_file}')
         include = launch.actions.IncludeLaunchDescription(str(include_file),
                                                           launch_arguments=launch_arguments,
                                                           **kwargs)
@@ -121,7 +121,7 @@ class GroupGenerator(launch_generator.BaseGenerator):
     def add_group(
         self,
         namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None
-    ) -> typing.TypeVar("TGroupGenerator", bound="GroupGenerator"):
+    ) -> typing.TypeVar('TGroupGenerator', bound='GroupGenerator'):
         """Add group.
 
         Args:

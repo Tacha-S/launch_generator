@@ -46,9 +46,9 @@ class ContainerGenerator(launch_generator.BaseGenerator):
             Launch description.
         """
         return launch_ros.actions.ComposableNodeContainer(
-            package="rclcpp_components",
-            namespace=self.__namespace if self.__namespace is not None else "",
-            executable="component_container",
+            package='rclcpp_components',
+            namespace=self.__namespace if self.__namespace is not None else '',
+            executable='component_container',
             name=self.__name,
             composable_node_descriptions=[
                 action
