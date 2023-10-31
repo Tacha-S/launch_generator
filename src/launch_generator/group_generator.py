@@ -75,6 +75,22 @@ class GroupGenerator(launch_generator.BaseGenerator):
                  ros_arguments: typing.Iterable[launch.some_substitutions_type.SomeSubstitutionsType] | None = None,
                  arguments: typing.Iterable[launch.some_substitutions_type.SomeSubstitutionsType] | None = None,
                  **kwargs) -> launch_ros.actions.Node:
+        """Add node.
+
+        Args:
+            executable: Executable entry point name.
+            package: Package name.
+            name: Node name. Defaults to None.
+            namespace: Node namespace. Defaults to None.
+            exec_name: The label used to represent the process. Defaults to None.
+            parameters: Node parameters. Defaults to None.
+            remappings: Node remappings. Defaults to None.
+            ros_arguments: ROS arguments. Defaults to None.
+            arguments: Arguments. Defaults to None.
+
+        Returns:
+            Node description.
+        """
         node = launch_ros.actions.Node(executable=executable,
                                        package=package,
                                        name=name,
