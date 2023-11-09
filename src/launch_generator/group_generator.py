@@ -26,7 +26,8 @@ import launch_generator
 class GroupGenerator(launch_generator.BaseGenerator):
     """Group generator."""
 
-    def __init__(self, namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None) -> None:
+    def __init__(self, namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None,
+                 **kwargs) -> None:
         """Initialize.
 
         Args:
@@ -35,6 +36,7 @@ class GroupGenerator(launch_generator.BaseGenerator):
         super().__init__()
         if namespace is not None:
             self.launch_description.append(launch_ros.actions.PushRosNamespace(namespace))
+        self.__kwargs = kwargs
 
     def generate_launch_description(self) -> list[launch.action.Action]:
         """Generate launch description.
@@ -45,7 +47,7 @@ class GroupGenerator(launch_generator.BaseGenerator):
         return launch.actions.GroupAction(actions=[
             action if not isinstance(action, launch_generator.BaseGenerator) else action.generate_launch_description()
             for action in self.launch_description
-        ])
+        ], **self.__kwargs)
 
     def add_argument(self,
                      name: typing.Text,

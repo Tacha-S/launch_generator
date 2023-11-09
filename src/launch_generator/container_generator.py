@@ -26,7 +26,8 @@ class ContainerGenerator(launch_generator.BaseGenerator):
     def __init__(self,
                  name: launch.some_substitutions_type.SomeSubstitutionsType,
                  namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None,
-                 composable_node_descriptions: list[launch_ros.descriptions.ComposableNode] = []) -> None:
+                 composable_node_descriptions: list[launch_ros.descriptions.ComposableNode] = [],
+                 **kwargs) -> None:
         """Initialize.
 
         Args:
@@ -38,6 +39,7 @@ class ContainerGenerator(launch_generator.BaseGenerator):
         self.__name = name
         self.__namespace = namespace
         self.launch_description += composable_node_descriptions
+        self.__kwargs = kwargs
 
     def generate_launch_description(self) -> list[launch.action.Action]:
         """Generate launch description.
@@ -55,6 +57,7 @@ class ContainerGenerator(launch_generator.BaseGenerator):
                 if not isinstance(action, launch_generator.BaseGenerator) else action.generate_launch_description()
                 for action in self.launch_description
             ],
+            **self.__kwargs,
         )
 
     def add_composable_node(self,
