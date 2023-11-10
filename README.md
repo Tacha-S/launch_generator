@@ -253,3 +253,31 @@ gen.add_action(PushRosNamespace(namespace))
 
 return LaunchDescription(gen.generate_launch_description())
 ```
+
+## Utilities
+
+### condition()
+
+`condition()` is a function to create IfCondition or UnlessCondition object.
+
+
+```python
+arg = gen.add_arg(name, default_value, description, choices)
+
+# basic usage
+gen.add_node('executable_name', 'package_name',
+             condition=launch_generator.condition(arg)) # the node is launched only if arg is 'True' or 'true'
+
+# reverse condition
+gen.add_node('executable_name', 'package_name',
+             condition=launch_generator.condition(arg, reverse=True)) # the node is launched only if arg is 'False' or 'false'
+
+# python expression can be used
+gen.add_node('executable_name', 'package_name',
+             condition=launch_generator.condition([arg, '< 10'])) # the node is launched only if arg is less than 10
+
+arg2 = gen.add_arg(name, default_value, description, choices)
+# multiple conditions can be used
+gen.add_node('executable_name', 'package_name',
+             condition=launch_generator.condition([arg, '< 10 or ', arg2])) # the node is launched only if arg is less than 10 or greater than 20
+```

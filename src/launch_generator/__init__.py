@@ -19,10 +19,12 @@ from launch_generator.container_generator import ContainerGenerator
 
 from launch_generator.group_generator import GroupGenerator  # isort: skip
 from launch_generator.generator import Generator
+from launch_generator.utils import condition
 
 __all__ = [
     'BaseGenerator',
     'ContainerGenerator',
     'Generator',
     'GroupGenerator',
+    'condition',
 ]
