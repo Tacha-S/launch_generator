@@ -14,9 +14,11 @@
 # limitations under the License.
 #
 
+import pathlib
 import typing
 
 import launch
+import launch_ros
 
 
 def condition(
@@ -57,3 +59,15 @@ def condition(
                     extend_expression.append(exp)
         return condition_type(launch.substitutions.PythonExpression(extend_expression))
     return condition_type(launch.substitutions.PythonExpression(expression))
+
+
+def package_path(package_name: str) -> pathlib.Path:
+    """Get package path.
+
+    Args:
+        package_name: Package name.
+
+    Returns:
+        Package path.
+    """
+    return pathlib.Path(launch_ros.substitutions.FindPackageShare(package_name).find(package_name))

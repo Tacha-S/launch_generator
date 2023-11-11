@@ -20,6 +20,7 @@ from launch_generator.container_generator import ContainerGenerator
 from launch_generator.group_generator import GroupGenerator  # isort: skip
 from launch_generator.generator import Generator
 from launch_generator.utils import condition
+from launch_generator.utils import package_path
 
 __all__ = [
     'BaseGenerator',
@@ -27,4 +28,5 @@ __all__ = [
     'Generator',
     'GroupGenerator',
     'condition',
+    'package_path',
 ]
