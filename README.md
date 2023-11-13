@@ -231,6 +231,26 @@ launch_generator
 node = container.add_composable_node(package, plugin, name, namespace, parameters, remappings, extra_arguments)
 ```
 
+### Register Event Handler
+
+launch_ros
+
+```python
+register_event_handler = RegisterEventHandler(
+    event_handler=OnProcessExit(
+        target_action=target_node,
+        on_exit=[other_node],
+    ),
+)
+```
+
+launch_generator
+
+```python
+on_exit = gen.add_register_event_handler(target_node, launch_generator.EventTriggerType.ON_EXIT)
+on_exit.add_action(executable, package, name)
+```
+
 ### Other entities
 
 `add_action()` supports all the entities of `launch` and `launch_ros` packages.
