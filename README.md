@@ -278,6 +278,27 @@ on_exit = gen.add_register_event_handler(target_node, launch_generator.EventTrig
 on_exit.add_action(executable, package, name)
 ```
 
+### Set parameter
+
+launch_ros
+
+```python
+set_parameter = SetParameter(
+    name=name,
+    value=value,
+)
+
+return LaunchDescription([set_parameter, ...])
+```
+
+launch_generator
+
+```python
+gen.add_set_parameter(name, value)
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Other entities
 
 `add_action()` supports all the entities of `launch` and `launch_ros` packages.

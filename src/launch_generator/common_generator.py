@@ -228,6 +228,22 @@ class CommonGenerator(launch_generator.BaseGenerator):
         self.launch_description.append(gen)
         return gen
 
+    def add_set_parameter(self, name: launch.some_substitutions_type.SomeSubstitutionsType,
+                          value: launch_ros.parameters_type.SomeParameterValue,
+                          **kwargs) -> launch_ros.actions.SetParameter:
+        """Add set parameter.
+
+        Args:
+            name: Parameter name.
+            value: Parameter value.
+
+        Returns:
+            Set parameter action.
+        """
+        set_parameter = launch_ros.actions.SetParameter(name, value, **kwargs)
+        self.launch_description.append(set_parameter)
+        return set_parameter
+
     def add_action(self, action: launch.action.Action) -> launch.action.Action:
         """Add any action.
 
