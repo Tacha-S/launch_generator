@@ -51,7 +51,7 @@ class EventHandlerGenerator(CommonGenerator):
                                                          EventTriggerType) else EventTriggerType(trigger_type)
         self.__kwargs = kwargs
 
-    def generate_launch_description(self) -> list[launch.action.Action]:
+    def generate_launch_description(self) -> launch.actions.RegisterEventHandler:
         """Generate launch description.
 
         Returns:

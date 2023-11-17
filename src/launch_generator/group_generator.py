@@ -37,7 +37,7 @@ class GroupGenerator(CommonGenerator):
             self.launch_description.append(launch_ros.actions.PushRosNamespace(namespace))
         self.__kwargs = kwargs
 
-    def generate_launch_description(self) -> list[launch.action.Action]:
+    def generate_launch_description(self) -> launch.actions.GroupAction:
         """Generate launch description.
 
         Returns:

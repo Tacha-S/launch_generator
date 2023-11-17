@@ -41,7 +41,7 @@ class ContainerGenerator(BaseGenerator):
         self.launch_description += composable_node_descriptions
         self.__kwargs = kwargs
 
-    def generate_launch_description(self) -> list[launch.action.Action]:
+    def generate_launch_description(self) -> launch_ros.actions.ComposableNodeContainer:
         """Generate launch description.
 
         Returns:
