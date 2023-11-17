@@ -15,8 +15,9 @@
 #
 
 from launch_generator.base_generator import BaseGenerator
-from launch_generator.common_generator import CommonGenerator
 from launch_generator.container_generator import ContainerGenerator
+
+from launch_generator.common_generator import CommonGenerator  # isort:skip
 from launch_generator.event_handler_generator import EventHandlerGenerator
 from launch_generator.event_handler_generator import EventTriggerType
 
