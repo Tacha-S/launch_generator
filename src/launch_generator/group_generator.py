@@ -17,10 +17,11 @@
 import launch
 import launch_ros
 
-import launch_generator
+from launch_generator.base_generator import BaseGenerator
+from launch_generator.common_generator import CommonGenerator
 
 
-class GroupGenerator(launch_generator.CommonGenerator):
+class GroupGenerator(CommonGenerator):
     """Group generator."""
 
     def __init__(self,
@@ -43,7 +44,7 @@ class GroupGenerator(launch_generator.CommonGenerator):
             Launch description.
         """
         return launch.actions.GroupAction(actions=[
-            action if not isinstance(action, launch_generator.BaseGenerator) else action.generate_launch_description()
+            action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
             for action in self.launch_description
         ],
                                           **self.__kwargs)

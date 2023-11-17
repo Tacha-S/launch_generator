@@ -22,10 +22,11 @@ import typing
 import launch
 import launch_ros
 
-import launch_generator
+from launch_generator.base_generator import BaseGenerator
+from launch_generator.container_generator import ContainerGenerator
 
 
-class CommonGenerator(launch_generator.BaseGenerator):
+class CommonGenerator(BaseGenerator):
     """Group generator."""
     event_action_type = (launch.some_actions_type.SomeActionsType
                          | typing.Callable[
@@ -170,7 +171,7 @@ class CommonGenerator(launch_generator.BaseGenerator):
         namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None,
         composable_node_descriptions: list[launch_ros.descriptions.ComposableNode] = [],
         **kwargs,
-    ) -> launch_generator.ContainerGenerator:
+    ) -> ContainerGenerator:
         """Add composable node container.
 
         Args:
@@ -181,10 +182,10 @@ class CommonGenerator(launch_generator.BaseGenerator):
         Returns:
             Container generator.
         """
-        gen = launch_generator.ContainerGenerator(name=name,
-                                                  namespace=namespace,
-                                                  composable_node_descriptions=composable_node_descriptions,
-                                                  **kwargs)
+        gen = ContainerGenerator(name=name,
+                                 namespace=namespace,
+                                 composable_node_descriptions=composable_node_descriptions,
+                                 **kwargs)
         self.launch_description.append(gen)
         return gen
 

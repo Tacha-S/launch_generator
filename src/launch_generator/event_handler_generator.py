@@ -19,9 +19,8 @@ from enum import Enum
 
 import launch
 
-import launch_generator
-
-launch.actions.RegisterEventHandler
+from launch_generator.base_generator import BaseGenerator
+from launch_generator.common_generator import CommonGenerator
 
 
 class EventTriggerType(Enum):
@@ -35,7 +34,7 @@ class EventTriggerType(Enum):
     ON_STDERR = 'on_stderr'
 
 
-class EventHandlerGenerator(launch_generator.CommonGenerator):
+class EventHandlerGenerator(CommonGenerator):
     """Generate launch description for register event handler."""
 
     def __init__(self, target_action: typing.Callable[[launch.actions.ExecuteLocal], bool]
@@ -63,50 +62,50 @@ class EventHandlerGenerator(launch_generator.CommonGenerator):
                 event_handler = launch.event_handlers.OnProcessExit(
                     target_action=self.__target_action,
                     on_exit=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_COMPLETION:
                 event_handler = launch.event_handlers.OnExecutionComplete(
                     target_action=self.__target_action,
                     on_completion=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_START:
                 event_handler = launch.event_handlers.OnProcessStart(
                     target_action=self.__target_action,
                     on_start=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_SHUTDOWN:
                 event_handler = launch.event_handlers.OnShutdown(
                     target_action=self.__target_action,
                     on_shutdown=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_STDIN:
                 event_handler = launch.event_handlers.OnProcessIO(
                     target_action=self.__target_action,
                     on_stdin=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_STDOUT:
                 event_handler = launch.event_handlers.OnProcessIO(
                     target_action=self.__target_action,
                     on_stdout=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case EventTriggerType.ON_STDERR:
                 event_handler = launch.event_handlers.OnProcessIO(
                     target_action=self.__target_action,
                     on_stderr=[
-                        action if not isinstance(action, launch_generator.BaseGenerator) else
-                        action.generate_launch_description() for action in self.launch_description
+                        action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
+                        for action in self.launch_description
                     ])
             case _:
                 raise ValueError(f'Unknown trigger type: {self.__trigger_type}')

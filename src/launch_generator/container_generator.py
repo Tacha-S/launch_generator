@@ -17,10 +17,10 @@
 import launch
 import launch_ros
 
-import launch_generator
+from launch_generator.base_generator import BaseGenerator
 
 
-class ContainerGenerator(launch_generator.BaseGenerator):
+class ContainerGenerator(BaseGenerator):
     """Generate launch description for composable node container."""
 
     def __init__(self,
@@ -53,8 +53,7 @@ class ContainerGenerator(launch_generator.BaseGenerator):
             executable='component_container',
             name=self.__name,
             composable_node_descriptions=[
-                action
-                if not isinstance(action, launch_generator.BaseGenerator) else action.generate_launch_description()
+                action if not isinstance(action, BaseGenerator) else action.generate_launch_description()
                 for action in self.launch_description
             ],
             **self.__kwargs,
