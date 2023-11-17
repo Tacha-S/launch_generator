@@ -27,7 +27,10 @@ class BaseGenerator(object):
     def generate_launch_description(self) -> list[launch.action.Action]:
         """Generate launch description.
 
+        Raises:
+            NotImplementedError: Not implemented.
+
         Returns:
             Launch description.
         """
-        pass
+        raise NotImplementedError()
