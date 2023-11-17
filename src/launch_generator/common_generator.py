@@ -244,6 +244,22 @@ class CommonGenerator(launch_generator.BaseGenerator):
         self.launch_description.append(set_parameter)
         return set_parameter
 
+    def add_set_remap(self, src: launch.some_substitutions_type.SomeSubstitutionsType,
+                      dst: launch.some_substitutions_type.SomeSubstitutionsType,
+                      **kwargs) -> launch_ros.actions.SetRemap:
+        """Add set remap.
+
+        Args:
+            src: Source topic name.
+            dst: Destination topic name.
+
+        Returns:
+            Set remap action.
+        """
+        set_remap = launch_ros.actions.SetRemap(src, dst, **kwargs)
+        self.launch_description.append(set_remap)
+        return set_remap
+
     def add_action(self, action: launch.action.Action) -> launch.action.Action:
         """Add any action.
 

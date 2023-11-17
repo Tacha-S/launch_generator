@@ -299,6 +299,27 @@ gen.add_set_parameter(name, value)
 return LaunchDescription(gen.generate_launch_description())
 ```
 
+### Set remap
+
+launch_ros
+
+```python
+set_remap = SetRemap(
+    src=src_topic,
+    dst=dst_topic,
+)
+
+return LaunchDescription([set_remap, ...])
+```
+
+launch_generator
+
+```python
+gen.add_set_remap(src_topic, dst_topic)
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Other entities
 
 `add_action()` supports all the entities of `launch` and `launch_ros` packages.
