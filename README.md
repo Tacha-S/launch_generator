@@ -286,6 +286,37 @@ on_exit.add_action(executable, package, name)
 return LaunchDescription(gen.generate_launch_description())
 ```
 
+### Ros timer
+
+launch_ros
+
+```python
+
+timer = RosTimer(
+    period=period,
+    actions=[
+        Node(
+            ...
+        ),
+        Node(
+            ...
+        ),
+    ]
+)
+
+return LaunchDescription([timer, ...])
+```
+
+launch_generator
+
+```python
+timer = gen.add_ros_timer(period)
+timer.add_node(...)
+timer.add_node(...)
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Set parameter
 
 launch_ros

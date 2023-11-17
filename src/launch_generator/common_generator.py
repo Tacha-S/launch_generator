@@ -232,6 +232,21 @@ class CommonGenerator(BaseGenerator):
         self.launch_description.append(gen)
         return gen
 
+    def add_ros_timer(self, period: float | launch.some_substitutions_type.SomeSubstitutionsType,
+                      **kwargs) -> CommonGenerator:
+        """Add actions to be executed after a period of time.
+
+        Args:
+            period: Time period.
+
+        Returns:
+            Ros timer generator.
+        """
+        from .timer_generator import TimerGenerator
+        gen = TimerGenerator(period=period, **kwargs)
+        self.launch_description.append(gen)
+        return gen
+
     def add_set_parameter(self, name: launch.some_substitutions_type.SomeSubstitutionsType,
                           value: launch_ros.parameters_type.SomeParameterValue,
                           **kwargs) -> launch_ros.actions.SetParameter:
