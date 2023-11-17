@@ -248,6 +248,29 @@ class CommonGenerator(BaseGenerator):
         self.launch_description.append(set_parameter)
         return set_parameter
 
+    def add_set_parameters_from_file(self, package: launch.some_substitutions_type.SomeSubstitutionsType,
+                                     relative_file_path: typing.Text,
+                                     **kwargs) -> launch_ros.actions.SetParametersFromFile:
+        """Add set parameters from file.
+
+        Args:
+            package: Package name.
+            relative_file_path: Relative file path.
+
+        Raises:
+            FileNotFoundError: Parameter file not found.
+
+        Returns:
+            Set parameters from file action.
+        """
+        param_file = (pathlib.Path(launch_ros.substitutions.FindPackageShare(package).find(package))
+                      / relative_file_path)
+        if not param_file.exists():
+            raise FileNotFoundError(f'Parameter file not found: {param_file}')
+        set_parameters_from_file = launch_ros.actions.SetParametersFromFile(str(param_file), **kwargs)
+        self.launch_description.append(set_parameters_from_file)
+        return set_parameters_from_file
+
     def add_set_remap(self, src: launch.some_substitutions_type.SomeSubstitutionsType,
                       dst: launch.some_substitutions_type.SomeSubstitutionsType,
                       **kwargs) -> launch_ros.actions.SetRemap:

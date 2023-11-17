@@ -307,6 +307,26 @@ gen.add_set_parameter(name, value)
 return LaunchDescription(gen.generate_launch_description())
 ```
 
+### Set parameter file
+
+launch_ros
+
+```python
+package_path = FindPackageShare('package_name').find('package_name')
+config_file_path = os.path.join(package_path, 'config', 'file_name.yaml')
+set_parameter_file = SetParameterFile(config_file_path)
+
+return LaunchDescription([set_parameter_file, ...])
+```
+
+launch_generator
+
+```python
+gen.add_set_parameter_file('package_name', 'config/file_name.yaml')
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Set remap
 
 launch_ros
