@@ -223,12 +223,16 @@ node = ComposableNode(
     remappings=remappings,
     extra_arguments=extra_arguments,
 )
+
+return LaunchDescription([node, ...])
 ```
 
 launch_generator
 
 ```python
 node = container.add_composable_node(package, plugin, name, namespace, parameters, remappings, extra_arguments)
+
+return LaunchDescription(gen.generate_launch_description())
 ```
 
 ### Load composable nodes to existing container
@@ -269,6 +273,8 @@ register_event_handler = RegisterEventHandler(
         on_exit=[other_node],
     ),
 )
+
+return LaunchDescription([register_event_handler, ...])
 ```
 
 launch_generator
@@ -276,6 +282,8 @@ launch_generator
 ```python
 on_exit = gen.add_register_event_handler(target_node, launch_generator.EventTriggerType.ON_EXIT)
 on_exit.add_action(executable, package, name)
+
+return LaunchDescription(gen.generate_launch_description())
 ```
 
 ### Set parameter
