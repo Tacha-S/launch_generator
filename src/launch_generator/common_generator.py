@@ -264,6 +264,22 @@ class CommonGenerator(BaseGenerator):
         self.launch_description.append(set_remap)
         return set_remap
 
+    def add_set_environment_variable(self, name: launch.some_substitutions_type.SomeSubstitutionsType,
+                                     value: launch.some_substitutions_type.SomeSubstitutionsType,
+                                     **kwargs) -> launch.actions.SetEnvironmentVariable:
+        """Add set environment variable.
+
+        Args:
+            name: Env name.
+            value: Env value.
+
+        Returns:
+            Set environment variable action.
+        """
+        set_env_var = launch.actions.SetEnvironmentVariable(name, value, **kwargs)
+        self.launch_description.append(set_env_var)
+        return set_env_var
+
     def add_action(self, action: launch.action.Action) -> launch.action.Action:
         """Add any action.
 

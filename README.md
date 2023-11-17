@@ -328,6 +328,27 @@ gen.add_set_remap(src_topic, dst_topic)
 return LaunchDescription(gen.generate_launch_description())
 ```
 
+### Set environment variable
+
+launch_ros
+
+```python
+set_env = SetEnvironmentVariable(
+    name=name,
+    value=value,
+)
+
+return LaunchDescription([set_env, ...])
+```
+
+launch_generator
+
+```python
+gen.add_set_environment_variable(name, value)
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Other entities
 
 `add_action()` supports all the entities of `launch` and `launch_ros` packages.
