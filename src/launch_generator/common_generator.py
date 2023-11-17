@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+from __future__ import annotations
+
 import pathlib
 import typing
 
@@ -148,7 +150,7 @@ class CommonGenerator(launch_generator.BaseGenerator):
 
     def add_group(self,
                   namespace: launch.some_substitutions_type.SomeSubstitutionsType | None = None,
-                  **kwargs) -> launch_generator.BaseGenerator:
+                  **kwargs) -> CommonGenerator:
         """Add group.
 
         Args:
@@ -192,7 +194,7 @@ class CommonGenerator(launch_generator.BaseGenerator):
         | launch.actions.ExecuteLocal,
         trigger_type: str,
         **kwargs,
-    ) -> launch_generator.BaseGenerator:
+    ) -> CommonGenerator:
         """Add register event handler.
 
         Args:
