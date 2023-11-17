@@ -19,7 +19,7 @@ import launch
 import launch_generator
 
 
-class Generator(launch_generator.GroupGenerator):
+class Generator(launch_generator.CommonGenerator):
     """Generator class for launch description."""
 
     def __init__(self) -> None:

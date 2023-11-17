@@ -20,9 +20,8 @@ from launch_generator.container_generator import ContainerGenerator
 from launch_generator.common_generator import CommonGenerator  # isort:skip
 from launch_generator.event_handler_generator import EventHandlerGenerator
 from launch_generator.event_handler_generator import EventTriggerType
-
-from launch_generator.group_generator import GroupGenerator  # isort:skip
 from launch_generator.generator import Generator
+from launch_generator.group_generator import GroupGenerator
 from launch_generator.utils import condition
 from launch_generator.utils import package_path
 
