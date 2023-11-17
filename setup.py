@@ -18,7 +18,7 @@ import setuptools
 
 setuptools.setup(
     name='launch_generator',
-    version='0.2.1',
+    version='0.3.0',
     author='Tatsuro Sakaguchi',
     author_email='tatsuro.sakaguchi@g.softbank.co.jp',
     description='The package `launch-generator` is a tool to easily generate launch descriptions for ROS 2.',
