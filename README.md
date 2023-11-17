@@ -231,6 +231,33 @@ launch_generator
 node = container.add_composable_node(package, plugin, name, namespace, parameters, remappings, extra_arguments)
 ```
 
+### Load composable nodes to existing container
+
+launch_ros
+
+```python
+load_composable_nodes = LoadComposableNodes(
+    target_container='target_container_name',
+    composable_node_descriptions=[
+        ComposableNode(...),
+        ComposableNode(...),
+    ],
+)
+
+return LaunchDescription([load_composable_nodes, ...])
+```
+
+launch_generator
+
+```python
+load_composable_nodes = gen.add_load_composable_nodes('target_container_name', [
+    gen.add_composable_node(...),
+    gen.add_composable_node(...),
+])
+
+return LaunchDescription(gen.generate_launch_description())
+```
+
 ### Register Event Handler
 
 launch_ros
@@ -279,7 +306,6 @@ return LaunchDescription(gen.generate_launch_description())
 ### condition()
 
 `condition()` is a function to create IfCondition or UnlessCondition object.
-
 
 ```python
 arg = gen.add_arg(name, default_value, description, choices)

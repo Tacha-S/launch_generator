@@ -188,6 +188,24 @@ class CommonGenerator(launch_generator.BaseGenerator):
         self.launch_description.append(gen)
         return gen
 
+    def add_load_composable_nodes(self, target_container: launch.some_substitutions_type.SomeSubstitutionsType
+                                  | launch_ros.actions.ComposableNodeContainer,
+                                  composable_node_descriptions: list[launch_ros.descriptions.ComposableNode],
+                                  **kwargs) -> launch_ros.actions.LoadComposableNodes:
+        """Add load composable nodes.
+
+        Args:
+            target_container: Target container.
+            composable_node_descriptions: Composable node descriptions.
+
+        Returns:
+            Load composable nodes action.
+        """
+        load_composable_nodes = launch_ros.actions.LoadComposableNodes(
+            composable_node_descriptions=composable_node_descriptions, target_container=target_container, **kwargs)
+        self.launch_description.append(load_composable_nodes)
+        return load_composable_nodes
+
     def add_register_event_handler(
         self,
         target_action: typing.Callable[[launch.actions.ExecuteLocal], bool]
