@@ -25,4 +25,5 @@ setuptools.setup(
     url='https://github.com/Tacha-S/launch_generator',
     package_dir={'': 'src'},
     packages=setuptools.find_packages('src', include=['launch_generator']),
+    install_requires=['pyyaml'],
 )

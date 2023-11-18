@@ -449,3 +449,43 @@ arg2 = gen.add_arg(name, default_value, description, choices)
 gen.add_node('executable_name', 'package_name',
              condition=launch_generator.condition([arg, '< 10 or ', arg2])) # the node is launched only if arg is less than 10 or greater than 20
 ```
+
+### load_param_file()
+
+`load_param_file()` is a function to load a yaml file to parameter dictionary.
+The function can replace the value of parameters written in the form of `$(arg arg_name)` like `subst_value` of ROS1 with `LaunchConfiguration(arg_name)`.
+
+Example of yaml file:
+
+```yaml
+node_name:
+    ros__parameters:
+        param1: $(arg arg_name)
+        param2:
+            sub1: prefix_$(arg arg_name)
+            sub2: $(arg arg_name)_suffix
+            sub3: $(arg arg_name)_$(arg_name2)
+```
+
+```python
+arg = gen.add_arg('arg_name', 'default_value')
+arg2 = gen.add_arg('arg_name2', 'default_value')
+param_dict = launch_generator.load_param_file('package_name', 'config/file_name.yaml')
+
+# param_dict = {
+#     'node_name': {
+#         'ros__parameters': {
+#             'param1': launch.substitutions.LaunchConfiguration('arg_name'),
+#             'param2': {
+#                 'sub1': ['prefix_', launch.substitutions.LaunchConfiguration('arg_name')],
+#                 'sub2': [launch.substitutions.LaunchConfiguration('arg_name'), '_suffix'],
+#                 'sub3': [launch.substitutions.LaunchConfiguration('arg_name'), '_', launch.substitutions.LaunchConfiguration('arg_name2')],
+#             }
+#         }
+#     }
+# }
+
+gen.add_node('executable_name', 'package_name', parameters=[param_dict['node_name']['ros__parameters']])
+
+return LaunchDescription(gen.generate_launch_description())
+```

@@ -15,10 +15,12 @@
 #
 
 import pathlib
+import re
 import typing
 
 import launch
 import launch_ros
+import yaml
 
 
 def condition(
@@ -71,3 +73,66 @@ def package_path(package_name: str) -> pathlib.Path:
         Package path.
     """
     return pathlib.Path(launch_ros.substitutions.FindPackageShare(package_name).find(package_name))
+
+
+def load_param_file(package: launch.some_substitutions_type.SomeSubstitutionsType,
+                    relative_file_path: typing.Text) -> dict:
+    """Load param file to dict. Replace $(arg xxx) with LaunchConfiguration(xxx).
+
+    Args:
+        package: Package name.
+        relative_file_path: Relative file path.
+
+    Returns:
+        Parameters.
+    """
+    path = package_path(package) / relative_file_path
+    with open(path, 'r') as f:
+        parameters = yaml.safe_load(f.read())
+
+    def __replace_arg(params: dict[str, typing.Any]) -> None:
+        """Replace $(arg xxx) with LaunchConfiguration(xxx).
+
+        Args:
+            params: Parameters.
+        """
+        regex = re.compile(r'\$\(arg \w+?\)')
+        replaced_keys = {}
+        for key, value in params.items():
+            if isinstance(value, dict):
+                __replace_arg(value)
+            elif isinstance(value, str):
+                match = regex.findall(value)
+                if match:
+                    replaced = []
+                    start = 0
+                    for m in match:
+                        i = value.find(m)
+                        if i > start:
+                            replaced.append(value[start:i])
+                        replaced.append(launch.substitutions.LaunchConfiguration(m[6:-1]))
+                        start = i + len(m)
+                    if start < len(value):
+                        replaced.append(value[start:])
+                    params[key] = replaced
+                    value = replaced
+
+            match = regex.findall(key)
+            if match:
+                replaced = []
+                start = 0
+                for m in match:
+                    i = key.find(m)
+                    if i > start:
+                        replaced.append(key[start:i])
+                    replaced.append(launch.substitutions.LaunchConfiguration(m[6:-1]))
+                    start = i + len(m)
+                if start < len(key):
+                    replaced.append(key[start:])
+                replaced = tuple(replaced)
+                replaced_keys[replaced] = value
+        params.update(replaced_keys)
+
+    __replace_arg(parameters)
+
+    return parameters

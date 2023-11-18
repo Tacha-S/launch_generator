@@ -17,11 +17,13 @@
 from launch_generator.event_handler_generator import EventTriggerType
 from launch_generator.generator import Generator
 from launch_generator.utils import condition
+from launch_generator.utils import load_param_file
 from launch_generator.utils import package_path
 
 __all__ = [
     'EventTriggerType',
     'Generator',
     'condition',
+    'load_param_file',
     'package_path',
 ]
