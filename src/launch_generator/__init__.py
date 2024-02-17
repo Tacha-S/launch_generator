@@ -19,6 +19,7 @@ from launch_generator.generator import Generator
 from launch_generator.utils import condition
 from launch_generator.utils import load_param_file
 from launch_generator.utils import package_path
+from launch_generator.utils import set_action_remap
 
 __all__ = [
     'EventTriggerType',
@@ -26,4 +27,5 @@ __all__ = [
     'condition',
     'load_param_file',
     'package_path',
+    'set_action_remap',
 ]

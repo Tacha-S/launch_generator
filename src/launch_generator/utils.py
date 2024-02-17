@@ -22,6 +22,8 @@ import launch
 import launch_ros
 import yaml
 
+from launch_generator.common_generator import CommonGenerator
+
 
 def condition(
     expression: str | launch.substitution.Substitution | typing.Iterable,
@@ -136,3 +138,27 @@ def load_param_file(package: launch.some_substitutions_type.SomeSubstitutionsTyp
     __replace_arg(parameters)
 
     return parameters
+
+
+def set_action_remap(gen: CommonGenerator, src: launch.some_substitutions_type.SomeSubstitutionsType,
+                     dst: launch.some_substitutions_type.SomeSubstitutionsType) -> None:
+    """Remap action namespace from src to dst.
+
+    Following topic and service will be remapped:
+    - {src}/_action/send_goal
+    - {src}/_action/cancel_goal
+    - {src}/_action/get_result
+    - {src}/_action/feedback
+    - {src}/_action/status
+
+    Args:
+        gen: Launch generator.
+        src: Source action namespace.
+        dst: Destination action namespace.
+    """
+    action_services = ['send_goal', 'cancel_goal', 'get_result']
+    action_topics = ['feedback', 'status']
+    for srv in action_services:
+        gen.add_set_remap([src, f'/_action/{srv}'], [dst, f'/_action/{srv}'])
+    for topic in action_topics:
+        gen.add_set_remap([src, f'/_action/{topic}'], [dst, f'/_action/{topic}'])
