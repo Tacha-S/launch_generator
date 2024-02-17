@@ -1,6 +1,6 @@
 [project]
 name = "launch-generator"
-version = "0.4.0"
+version = "0.5.0"
 description = "Simple launch file generator for ROS2."
 authors = [
     { name = "Tatsuro Sakaguchi", email = "tatsuro.sakaguchi@g.softbank.co.jp" },
