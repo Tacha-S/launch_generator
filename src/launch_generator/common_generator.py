@@ -28,14 +28,14 @@ from launch_generator.container_generator import ContainerGenerator
 
 class CommonGenerator(BaseGenerator):
     """Group generator."""
-    event_action_type = (launch.some_actions_type.SomeActionsType
+    event_action_type = (launch.some_entities_type.SomeEntitiesType
                          | typing.Callable[
                              [launch.events.process.ProcessExited, launch.launch_context.LaunchContext],
-                             launch.some_actions_type.SomeActionsType | None,
+                             launch.some_entities_type.SomeEntitiesType | None,
                          ]
                          | None)
     event_io_type = (typing.Callable[[launch.events.process.ProcessIO],
-                                     launch.some_actions_type.SomeActionsType | None] | None)
+                                     launch.some_entities_type.SomeEntitiesType | None] | None)
 
     def __init__(self) -> None:
         """Initialize.
